@@ -3,3 +3,5 @@
 ################################################################################
 
 /.vs/Morkovka/v16/Server/sqlite3
+/Morkovka/obj/Debug
+/.vs/Morkovka/v15/Server/sqlite3
