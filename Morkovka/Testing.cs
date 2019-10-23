@@ -40,7 +40,11 @@ namespace Morkovka
 
 
             TestProcessing test = new TestProcessing(q2);
+            str = test.getAnswers();
             test.goNext("q1");
+            str = test.getAnswers();
+            test.goNext("a1");
+            str = test.getAnswers();
         }
     }
 }
