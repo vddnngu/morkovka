@@ -17,6 +17,7 @@ namespace Morkovka
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
+            Testing t = new Testing();
         }
     }
 }
