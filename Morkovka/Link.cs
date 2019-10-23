@@ -32,6 +32,9 @@ namespace Morkovka
         }
         public Question (String _text, List<String> _answers, List<Link> _links)
         {
+            answers = new List<String>();
+            links = new List<Link>();
+            map = new Dictionary<String, int>();
             int i = 0;
             foreach (var aIt in _answers)
             {
