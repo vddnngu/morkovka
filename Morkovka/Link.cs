@@ -7,26 +7,62 @@ using System.Threading.Tasks;
 namespace Morkovka
 {
 
-    abstract class Link
+    class Link
     {
-        string Text;
-        public abstract bool isQuestion();
+        protected string text;
+        protected bool isQuest;
+        public bool isQuestion()
+        {
+            return isQuest;
+        }
         public string getText()
         {
-            return Text;
+            return text;
         }
     }
     class Question : Link
     {
-        bool isQuest;
-        Dictionary<String, Link> map;
-        public override bool isQuestion()
+
+        List<String>    answers;
+        List<Link>      links;
+        Dictionary<String, int> map;
+        public Question ()
         {
-            return isQuest;
+            isQuest = true;
+        }
+        public Question (String _text, List<String> _answers, List<Link> _links)
+        {
+            int i = 0;
+            foreach (var aIt in _answers)
+            {
+                answers.Add(aIt);
+                map[aIt] = i++;
+            }
+            foreach (var lIt in _links) links.Add(lIt);
+            text = _text;
+            isQuest = true;
+            
         }
         public Link getNext(String answer)
         {
-            return map[answer];
+            return links[map[answer]];
+        }
+        public List<String> getAnswers ()
+        {
+            return answers;
+        }
+    }
+    class Answer : Link
+    {
+
+        public Answer()
+        {
+            isQuest = false;
+        }
+        public Answer(String _text)
+        {
+            isQuest = false;
+            text = _text;
         }
     }
 }
