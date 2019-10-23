@@ -9,6 +9,10 @@ namespace Morkovka
     class TestProcessing
     {
         Link currentLink;
+        public TestProcessing (Link root)
+        {
+            currentLink = root;
+        }
         public List<String> getAnswers()
         {
             if (currentLink.GetType() == typeof(Question))
