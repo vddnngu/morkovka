@@ -24,12 +24,12 @@ namespace Morkovka
         {
             return currentLink.getText();
         }
-        public string getCurLinkType()
+        public bool curLinkIsQuestion()
         {
-            string LinkType;
-            if (currentLink.isQuestion() == true) { LinkType = "Question"; }
-            else { LinkType = "Answer"; }
-            return LinkType;
+            bool LinkIsQuestion;
+            if (currentLink.isQuestion() == true) { LinkIsQuestion = true; }
+            else { LinkIsQuestion = false; }
+            return LinkIsQuestion;
         }
         public bool goNext(String answer)
         {
