@@ -20,6 +20,14 @@ namespace Morkovka
             else
                 return null;
         }
+        public string getCurLinkText()
+        {
+            return currentLink.getText();
+        }
+        public bool curLinkIsQuestion()
+        {
+            return currentLink.isQuestion();
+        }
         public bool goNext(String answer)
         {
             currentLink = (currentLink as Question).getNext(answer);
