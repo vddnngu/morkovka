@@ -26,10 +26,7 @@ namespace Morkovka
         }
         public bool curLinkIsQuestion()
         {
-            bool LinkIsQuestion;
-            if (currentLink.isQuestion() == true) { LinkIsQuestion = true; }
-            else { LinkIsQuestion = false; }
-            return LinkIsQuestion;
+            return currentLink.isQuestion();
         }
         public bool goNext(String answer)
         {
