@@ -20,6 +20,13 @@ namespace Morkovka
             else
                 return null;
         }
+        public List<Link> getLinks()
+        {
+            if (currentLink.GetType() == typeof(Question))
+                return (currentLink as Question).getLinks();
+            else
+                return null;
+        }
         public string getCurLinkText()
         {
             return currentLink.getText();

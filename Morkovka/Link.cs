@@ -50,9 +50,13 @@ namespace Morkovka
         {
             return links[map[answer]];
         }
-        public List<String> getAnswers ()
+        public List<String> getAnswers()
         {
             return answers;
+        }
+        public List<Link> getLinks()
+        {
+            return links;
         }
     }
     class Answer : Link
