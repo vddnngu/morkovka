@@ -17,7 +17,10 @@ namespace Morkovka
         public Form1()
         {
             InitializeComponent();
+            Link root = new Link();
             myGUI = new StudentGUI(this, new TestProcessing(new Link()));
+            TestProcessing GameTest = new TestProcessing(root);
+
             //TODO заполнение дерева линков и корректное создание TestProcessing
         }
         private void Form1_Load(object sender, EventArgs e)
@@ -35,7 +38,8 @@ namespace Morkovka
             for (int i = 50; i < buts.Count * 50; i = i + 50)
             {
                 //if (buts.Count==2)
-                buts[i].Location = new Point(Width-i, Height-i); 
+                buts[i].Location = new Point(Width-i, Height-i);
+                Controls.Add(buts[i]);
                 
             }
         }
