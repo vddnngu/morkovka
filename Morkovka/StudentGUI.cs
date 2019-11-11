@@ -42,7 +42,7 @@ namespace Morkovka
             newbtn.Text = text;
             newbtn.UseVisualStyleBackColor = true;
             newbtn.Click += new EventHandler(newbtn_Click);
-            //Controls.Add(newbtn);
+             //Controls.Add(newbtn);
             return newbtn;
         }
         void newbtn_Click(object sender, EventArgs e)

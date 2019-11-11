@@ -32,7 +32,12 @@ namespace Morkovka
 
         internal void addButtons(List<Button> buts)
         {
-            
+            for (int i = 50; i < buts.Count * 50; i = i + 50)
+            {
+                //if (buts.Count==2)
+                buts[i].Location = new Point(Width-i, Height-i); 
+                
+            }
         }
     }
 }
