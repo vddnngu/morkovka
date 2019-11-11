@@ -63,9 +63,15 @@ namespace Morkovka
 
             str.Clear();
             lnk.Clear();
-            return q1;
+
+            TestProcessing test = new TestProcessing(q1);
+            str = test.getAnswers();
+            test.goNext("q1");
+            str = test.getAnswers();
+            test.goNext("a1");
+            str = test.getAnswers();
         }
 
           
-        }
     }
+}

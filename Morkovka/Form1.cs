@@ -18,8 +18,12 @@ namespace Morkovka
         {
             InitializeComponent();
             Link root = new Link();
+            List<String> str = new List<String>();
+            List<Link> lnk = new List<Link>();
             myGUI = new StudentGUI(this, new TestProcessing(new Link()));
             TestProcessing GameTest = new TestProcessing(root);
+            str = GameTest.getAnswers();
+
 
             //TODO заполнение дерева линков и корректное создание TestProcessing
         }
