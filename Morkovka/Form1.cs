@@ -23,7 +23,7 @@ namespace Morkovka
             myGUI = new StudentGUI(this, new TestProcessing(new Link()));
             TestProcessing GameTest = new TestProcessing(root);
             str = GameTest.getAnswers();
-
+            
 
             //TODO заполнение дерева линков и корректное создание TestProcessing
         }
@@ -39,13 +39,14 @@ namespace Morkovka
 
         internal void addButtons(List<Button> buts)
         {
-            for (int i = 50; i < buts.Count * 50; i = i + 50)
+            for (int i = 10; i < buts.Count * 10; i = i + 10)
             {
                 //if (buts.Count==2)
                 buts[i].Location = new Point(Width-i, Height-i);
                 Controls.Add(buts[i]);
                 
             }
+
         }
     }
 }

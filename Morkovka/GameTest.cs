@@ -70,6 +70,8 @@ namespace Morkovka
             str = test.getAnswers();
             test.goNext("a1");
             str = test.getAnswers();
+            
+            return q1;
         }
 
           
