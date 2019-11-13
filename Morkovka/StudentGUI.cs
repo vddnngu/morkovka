@@ -16,25 +16,21 @@ namespace Morkovka
             form = f;
             game = _game;
         }
-
         public void start()
         {
             displayLink();
         }
-
         public void goNext(string answer)
         {
             bool nextType = game.goNext(answer);
             displayLink();
         }
-
         void displayLink()
         {
             form.setMainText(game.getCurLinkText());
             createButtons();
             
         }
-
         Button createButton(string name, string text, Link link)
         {
             Button newbtn = new Button();
@@ -42,7 +38,6 @@ namespace Morkovka
             newbtn.Text = text;
             newbtn.UseVisualStyleBackColor = true;
             newbtn.Click += new EventHandler(newbtn_Click);
-             //Controls.Add(newbtn);
             return newbtn;
         }
         void newbtn_Click(object sender, EventArgs e)
@@ -51,15 +46,17 @@ namespace Morkovka
         }
         void createButtons()
         {
-            var links = game.getLinks();
-            var answers = game.getAnswers();
-            List<Button> buts = new List<Button>();
-            for (int i = 0; i < answers.Count; i++)
+            if (game.curLinkIsQuestion())
             {
-                buts.Add(createButton("but_" + i, answers[i], links[i]));
+                var links = game.getLinks();
+                var answers = game.getAnswers();
+                List<Button> buts = new List<Button>();
+                for (int i = 0; i < answers.Count; i++)
+                {
+                    buts.Add(createButton("but_" + i, answers[i], links[i]));
+                }
+                form.addButtons(buts);
             }
-            form.addButtons(buts);
-
         }
     }
 }

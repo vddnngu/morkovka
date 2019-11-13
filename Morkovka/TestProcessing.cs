@@ -37,7 +37,8 @@ namespace Morkovka
         }
         public bool goNext(String answer)
         {
-            currentLink = (currentLink as Question).getNext(answer);
+            if(currentLink.isQuestion())
+                currentLink = (currentLink as Question).getNext(answer);
             return currentLink.isQuestion();
         }
     }

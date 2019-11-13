@@ -8,6 +8,7 @@ namespace Morkovka
 {
     class GameTest
     {
+        public TestProcessing myTP;
         public GameTest()
         {
             Answer a1, a2, a3;
@@ -64,14 +65,7 @@ namespace Morkovka
             str.Clear();
             lnk.Clear();
 
-            TestProcessing test = new TestProcessing(q1);
-            str = test.getAnswers();
-            test.goNext("q1");
-            str = test.getAnswers();
-            test.goNext("a1");
-            str = test.getAnswers();
-            
-            return q1;
+            myTP = new TestProcessing(q1);
         }
 
           

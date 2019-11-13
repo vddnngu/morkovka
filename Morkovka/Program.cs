@@ -18,7 +18,7 @@ namespace Morkovka
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
 
-            GameTest firstTest = new GameTest();
+            
         }
     }
 }

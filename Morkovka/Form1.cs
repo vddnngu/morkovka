@@ -14,39 +14,45 @@ namespace Morkovka
     {
         Label mainTextLable;
         StudentGUI myGUI;
+        int j = 0;
         public Form1()
         {
             InitializeComponent();
-            Link root = new Link();
-            List<String> str = new List<String>();
-            List<Link> lnk = new List<Link>();
-            myGUI = new StudentGUI(this, new TestProcessing(new Link()));
-            TestProcessing GameTest = new TestProcessing(root);
-            str = GameTest.getAnswers();
-            
-
-            //TODO заполнение дерева линков и корректное создание TestProcessing
+            mainTextLable = new Label();
+            GameTest firstTest = new GameTest();
+            myGUI = new StudentGUI(this, firstTest.myTP);
+            TestProcessing GameTest = firstTest.myTP;
         }
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            
+        }
+        private void but_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Hello", "Welcome");
         }
 
         internal void setMainText(string text)
         {
+            mainTextLable.Location = new Point(200, 200);
+            Controls.Add(mainTextLable);
             mainTextLable.Text = text;
         }
 
         internal void addButtons(List<Button> buts)
         {
-            for (int i = 10; i < buts.Count * 10; i = i + 10)
+            for (int i = 1; i < buts.Count +1; i ++)
             {
                 //if (buts.Count==2)
-                buts[i].Location = new Point(Width-i, Height-i);
-                Controls.Add(buts[i]);
-                
+                buts[i-1].Location = new Point(Width/2-i*100 + j++*10, Height/2);
+                this.Controls.Add(buts[i-1]);
             }
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            myGUI.start();
         }
     }
 }
