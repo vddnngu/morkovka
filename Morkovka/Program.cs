@@ -14,9 +14,11 @@ namespace Morkovka
         [STAThread]
         static void Main()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            //Application.EnableVisualStyles();
+            //Application.SetCompatibleTextRenderingDefault(false);
+            //Application.Run(new Form1());
+            TestParser parser = new TestParser("C:\\Users\\VolkovsHomePC\\Desktop\\FirstTest.test");
+            parser.Parse();
         }
     }
 }

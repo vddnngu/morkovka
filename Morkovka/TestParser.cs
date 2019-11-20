@@ -23,8 +23,8 @@ namespace Morkovka
     class QwestEntity :  RecEntity
     {
         public int numText;
-        public List<int> numbersTexts;
-        public List<int> numbersAnswers;
+        public List<int> numbersTexts = new List<int>();
+        public List<int> numbersAnswers = new List<int>();
 
     }
 
@@ -41,7 +41,7 @@ namespace Morkovka
     {
         string path;
         FileStream file;
-        Dictionary<int, RecEntity> entityRecords;
+        Dictionary<int, RecEntity> entityRecords = new Dictionary<int, RecEntity>();
         public TestParser(string _path)
         {
             path = _path;
@@ -57,6 +57,7 @@ namespace Morkovka
                 string[] strs = tmp.Split('|');
                 AddEntity(strs);
             }
+            tmp = (entityRecords[(entityRecords[5] as QwestEntity).numText] as TextEntity).text;
         }
 
         private void AddEntity(string[] strs)
@@ -98,11 +99,12 @@ namespace Morkovka
         {
             QwestEntity res = new QwestEntity();
             res.num = Convert.ToInt32(strs[0]);
-            int count = Convert.ToInt32(strs[2]);
+            res.numText = Convert.ToInt32(strs[2]);
+            int count = Convert.ToInt32(strs[3]);
             for(int i = 0; i < count; i++)
             {
-                res.numbersTexts.Add(Convert.ToInt32(strs[3 + i]));
-                res.numbersAnswers.Add(Convert.ToInt32(strs[3 + count + i]));
+                res.numbersTexts.Add(Convert.ToInt32(strs[2 + i]));
+                res.numbersAnswers.Add(Convert.ToInt32(strs[2 + count + i]));
             }
             return res;
         }
