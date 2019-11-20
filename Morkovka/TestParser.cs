@@ -16,15 +16,32 @@ namespace Morkovka
     class RecEntity
     {
         public int num;
-        typeEntity type;
-        string text;
-        List<int> numbers;
+        public typeEntity type;
+        
+    }
+
+    class QwestEntity :  RecEntity
+    {
+        public int numText;
+        public List<int> numbersTexts;
+        public List<int> numbersAnswers;
+
+    }
+
+    class AnswerEntity : RecEntity
+    {
+        public int numText;
+    }
+
+    class TextEntity : RecEntity
+    {
+        public string text;
     }
     class TestParser
     {
         string path;
         FileStream file;
-        Dictionary<int, RecEntity> a;
+        Dictionary<int, RecEntity> entityRecords;
         public TestParser(string _path)
         {
             path = _path;
@@ -34,17 +51,60 @@ namespace Morkovka
         public void Parse()
         {
             StreamReader fin = new StreamReader(file);
-            string tmp="";
-            while (tmp != "END.")
+            string tmp;
+            while ((tmp = fin.ReadLine()) != "END.")
             {
-                tmp = fin.ReadLine();
                 string[] strs = tmp.Split('|');
-
+                AddEntity(strs);
             }
         }
-        void ParseLine(string num, string type, string data)
-        {
 
+        private void AddEntity(string[] strs)
+        {
+            RecEntity tmp;
+            if (strs[1] == "Qwestion")
+            {
+                tmp = CreateQwest(strs);
+            }
+            else if (strs[1] == "Answer")
+            {
+                tmp = CreateAnswer(strs);
+            }
+            else if (strs[1] == "Text")
+            {
+                tmp = CreateText(strs);
+            }
+            else tmp = null;
+            entityRecords[Convert.ToInt32(strs[0])] = tmp;        
+        }
+
+        private RecEntity CreateText(string[] strs)
+        {
+            TextEntity res = new TextEntity();
+            res.num = Convert.ToInt32(strs[0]);
+            res.text = strs[2];
+            return res;
+        }
+
+        private RecEntity CreateAnswer(string[] strs)
+        {
+            AnswerEntity res = new AnswerEntity();
+            res.num = Convert.ToInt32(strs[0]);
+            res.numText = Convert.ToInt32(strs[2]);
+            return res;
+        }
+
+        private RecEntity CreateQwest(string[] strs)
+        {
+            QwestEntity res = new QwestEntity();
+            res.num = Convert.ToInt32(strs[0]);
+            int count = Convert.ToInt32(strs[2]);
+            for(int i = 0; i < count; i++)
+            {
+                res.numbersTexts.Add(Convert.ToInt32(strs[3 + i]));
+                res.numbersAnswers.Add(Convert.ToInt32(strs[3 + count + i]));
+            }
+            return res;
         }
     }
 }
