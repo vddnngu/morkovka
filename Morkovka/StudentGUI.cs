@@ -57,6 +57,10 @@ namespace Morkovka
                 }
                 form.addButtons(buts);
             }
+            else
+            {
+                form.removeButtons();
+            }
         }
     }
 }

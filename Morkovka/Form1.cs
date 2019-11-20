@@ -14,6 +14,7 @@ namespace Morkovka
     {
         Label mainTextLable;
         StudentGUI myGUI;
+        List<Button> buttonsForRemove = new List<Button>();
         int j = 0;
         public Form1()
         {
@@ -34,18 +35,31 @@ namespace Morkovka
 
         internal void setMainText(string text)
         {
-            mainTextLable.Location = new Point(200, 200);
+            mainTextLable.Location = new Point((int)(Width * 0.07), (int)(Height / 3));
             Controls.Add(mainTextLable);
             mainTextLable.Text = text;
         }
 
+        internal void removeButtons()
+        {
+            foreach (var it in buttonsForRemove)
+            {
+                Controls.Remove(it);
+            }
+        }
         internal void addButtons(List<Button> buts)
         {
-            for (int i = 1; i < buts.Count +1; i ++)
+            removeButtons();
+            var startPoint = new Point((int)(Width*0.07), (int)(Height/2));
+            int buttonWidth = (int)(Width * 0.2);
+            int buttonHeigth = (int)(Height * 0.1);
+            for (int i = 0; i < buts.Count; i ++)
             {
-                //if (buts.Count==2)
-                buts[i-1].Location = new Point(Width/2-i*100 + j++*10, Height/2);
-                this.Controls.Add(buts[i-1]);
+                buts[i].Location = new Point((int)(startPoint.X+i*buttonWidth), startPoint.Y * (i/4+1));
+                buts[i].Width = buttonWidth;
+                buts[i].Height = buttonHeigth;
+                this.Controls.Add(buts[i]);
+                buttonsForRemove.Add(buts[i]);
             }
 
         }
