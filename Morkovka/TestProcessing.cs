@@ -9,7 +9,7 @@ namespace Morkovka
     class TestProcessing
     {
         Link currentLink;
-        public TestProcessing (Link root)
+        public TestProcessing(Link root)
         {
             currentLink = root;
         }
@@ -20,9 +20,25 @@ namespace Morkovka
             else
                 return null;
         }
+        public List<Link> getLinks()
+        {
+            if (currentLink.GetType() == typeof(Question))
+                return (currentLink as Question).getLinks();
+            else
+                return null;
+        }
+        public string getCurLinkText()
+        {
+            return currentLink.getText();
+        }
+        public bool curLinkIsQuestion()
+        {
+            return currentLink.isQuestion();
+        }
         public bool goNext(String answer)
         {
-            currentLink = (currentLink as Question).getNext(answer);
+            if (currentLink.isQuestion())
+                currentLink = (currentLink as Question).getNext(answer);
             return currentLink.isQuestion();
         }
     }
