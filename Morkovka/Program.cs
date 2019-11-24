@@ -17,7 +17,7 @@ namespace Morkovka
             //Application.EnableVisualStyles();
             //Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new Form1());
-            TestParser parser = new TestParser("C:\\Users\\VolkovsHomePC\\Desktop\\FirstTest.test");
+            TestParser parser = new TestParser("E:\\Документы\\New_Test.test");
             parser.Parse();
         }
     }

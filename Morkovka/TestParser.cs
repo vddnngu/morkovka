@@ -52,6 +52,10 @@ namespace Morkovka
         {
             StreamReader fin = new StreamReader(file);
             string tmp;
+            while((tmp = fin.ReadLine())!= "")
+            {
+                continue;
+            }
             while ((tmp = fin.ReadLine()) != "END.")
             {
                 string[] strs = tmp.Split('|');
@@ -63,15 +67,15 @@ namespace Morkovka
         private void AddEntity(string[] strs)
         {
             RecEntity tmp;
-            if (strs[1] == "Qwestion")
+            if (strs[1] == "Q")
             {
                 tmp = CreateQwest(strs);
             }
-            else if (strs[1] == "Answer")
+            else if (strs[1] == "A")
             {
                 tmp = CreateAnswer(strs);
             }
-            else if (strs[1] == "Text")
+            else if (strs[1] == "T")
             {
                 tmp = CreateText(strs);
             }
