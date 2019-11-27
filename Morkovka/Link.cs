@@ -23,14 +23,14 @@ namespace Morkovka
     class Question : Link
     {
 
-        List<String>    answers;
-        List<Link>      links;
+        List<String> answers;
+        List<Link> links;
         Dictionary<String, int> map;
-        public Question ()
+        public Question()
         {
             isQuest = true;
         }
-        public Question (String _text, List<String> _answers, List<Link> _links)
+        public Question(String _text, List<String> _answers, List<Link> _links)
         {
             answers = new List<String>();
             links = new List<Link>();
@@ -44,15 +44,19 @@ namespace Morkovka
             foreach (var lIt in _links) links.Add(lIt);
             text = _text;
             isQuest = true;
-            
+
         }
         public Link getNext(String answer)
         {
             return links[map[answer]];
         }
-        public List<String> getAnswers ()
+        public List<String> getAnswers()
         {
             return answers;
+        }
+        public List<Link> getLinks()
+        {
+            return links;
         }
     }
     class Answer : Link

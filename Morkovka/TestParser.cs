@@ -52,9 +52,11 @@ namespace Morkovka
         {
             StreamReader fin = new StreamReader(file);
             string tmp;
-            while((tmp = fin.ReadLine())!= "")
+            char ch = '|';
+            while ((tmp = fin.ReadLine())!= "")
             {
-                continue;
+                int num = tmp.IndexOf(ch);
+                int MainQuest = tmp[num + 1];
             }
             while ((tmp = fin.ReadLine()) != "END.")
             {
@@ -112,5 +114,10 @@ namespace Morkovka
             }
             return res;
         }
+        //Dictionary<String, int> ParsMap = TestParser.Get
+        //private void GetDict()
+        //{
+
+        //}
     }
 }
