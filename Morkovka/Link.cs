@@ -46,6 +46,20 @@ namespace Morkovka
             isQuest = true;
 
         }
+        public Question(String _text)
+        {
+            answers = new List<String>();
+            links = new List<Link>();
+            map = new Dictionary<String, int>();
+            text = _text;
+            isQuest = true;
+        }
+
+        public void addAnswer(String answer, Link link)
+        {
+            answers.Add(answer);
+            links.Add(link);
+        }
         public Link getNext(String answer)
         {
             return links[map[answer]];

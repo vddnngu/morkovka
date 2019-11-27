@@ -10,7 +10,7 @@ namespace Morkovka
     enum typeEntity
     {
         text,
-        quwestion,
+        question,
         answer
     }
     class RecEntity
@@ -20,7 +20,7 @@ namespace Morkovka
         
     }
 
-    class QwestEntity :  RecEntity
+    class QuestEntity :  RecEntity
     {
         public int numText;
         public List<int> numbersTexts = new List<int>();
@@ -41,31 +41,51 @@ namespace Morkovka
     {
         string path;
         FileStream file;
+        StreamReader fin;
         Dictionary<int, RecEntity> entityRecords = new Dictionary<int, RecEntity>();
+        TestCreater creator;
         public TestParser(string _path)
         {
             path = _path;
             file = new FileStream(path, FileMode.Open);
+            fin = new StreamReader(file);
+            creator = new TestCreater();
+        }
+
+        void ParseHeader()
+        {
+            string tmp;
+            while ((tmp = fin.ReadLine()) != "END HEADER")
+            {
+                if (tmp == "") continue;
+                string[] strs = tmp.Split('|');
+                if (strs[0] == "Main Question Number")
+                {
+                    creator.setMainEntity(Convert.ToInt32(strs[1]));
+                    continue;
+                }
+                //TODO add support of fields header: author data eth
+            }
         }
 
         public void Parse()
         {
-            StreamReader fin = new StreamReader(file);
+            ParseHeader();
             string tmp;
-            char ch = '|';
-            while ((tmp = fin.ReadLine())!= "")
-            {
-                int num = tmp.IndexOf(ch);
-                int MainQuest = tmp[num + 1];
-            }
             while ((tmp = fin.ReadLine()) != "END.")
             {
+                if (tmp == "") continue;
                 string[] strs = tmp.Split('|');
                 AddEntity(strs);
             }
-            tmp = (entityRecords[(entityRecords[5] as QwestEntity).numText] as TextEntity).text;
+            creator.setRecords(entityRecords);
         }
 
+        public Link getRootLink()
+        {
+            creator.generate();
+            return creator.getLink();
+        }
         private void AddEntity(string[] strs)
         {
             RecEntity tmp;
@@ -90,6 +110,7 @@ namespace Morkovka
             TextEntity res = new TextEntity();
             res.num = Convert.ToInt32(strs[0]);
             res.text = strs[2];
+            res.type = typeEntity.text;
             return res;
         }
 
@@ -98,26 +119,84 @@ namespace Morkovka
             AnswerEntity res = new AnswerEntity();
             res.num = Convert.ToInt32(strs[0]);
             res.numText = Convert.ToInt32(strs[2]);
+            res.type = typeEntity.answer;
             return res;
         }
 
         private RecEntity CreateQwest(string[] strs)
         {
-            QwestEntity res = new QwestEntity();
+            QuestEntity res = new QuestEntity();
             res.num = Convert.ToInt32(strs[0]);
             res.numText = Convert.ToInt32(strs[2]);
             int count = Convert.ToInt32(strs[3]);
             for(int i = 0; i < count; i++)
             {
-                res.numbersTexts.Add(Convert.ToInt32(strs[2 + i]));
-                res.numbersAnswers.Add(Convert.ToInt32(strs[2 + count + i]));
+                res.numbersTexts.Add(Convert.ToInt32(strs[4 + i]));
+                res.numbersAnswers.Add(Convert.ToInt32(strs[4 + count + i]));
             }
+            res.type = typeEntity.question;
             return res;
         }
-        //Dictionary<String, int> ParsMap = TestParser.Get
-        //private void GetDict()
-        //{
+        
+    }
 
-        //}
+    class TestCreater
+    {
+        Dictionary<int, RecEntity> entityRecords;
+        int mainEntity;
+        Question startQuestion;
+        public TestCreater ()
+        {
+
+        }
+
+        public void setMainEntity(int mainEntity)
+        {
+            this.mainEntity = mainEntity;
+        }
+
+        public void setRecords(Dictionary<int, RecEntity> entityRecords)
+        {
+            this.entityRecords = entityRecords;
+        }
+
+        internal void generate()
+        {
+            if (!(entityRecords[mainEntity].type == typeEntity.question)) throw new Exception("Type of start entity must be a question!");
+            startQuestion = (linkEntityHandler(mainEntity) as Question);
+        }
+
+        private Link linkEntityHandler(int entityNumber)
+        {
+            Link currentLink;
+            if(entityRecords[entityNumber].type == typeEntity.text) throw new Exception("Type of start entity must be a question or answer!");
+            if(entityRecords[entityNumber].type == typeEntity.question)
+            {
+                int numText = (entityRecords[entityNumber] as QuestEntity).numText;
+                currentLink = new Question(textEntityHandler(numText));
+                int countAnswers = (entityRecords[entityNumber] as QuestEntity).numbersTexts.Count;
+                for (int i = 0; i< countAnswers; i++)
+                {
+                    (currentLink as Question).addAnswer(textEntityHandler((entityRecords[entityNumber] as QuestEntity).numbersTexts[i]), linkEntityHandler((entityRecords[entityNumber] as QuestEntity).numbersAnswers[i]));
+                }
+            }
+            else
+            {
+                int numText = (entityRecords[entityNumber] as AnswerEntity).numText;
+                currentLink = new Answer(textEntityHandler(numText));
+            }
+            return currentLink;
+        }
+
+        private string textEntityHandler(int entityNumber)
+        {
+            if(entityRecords[entityNumber].type != typeEntity.text) throw new Exception("Type of start entity must be a text!");
+            return (entityRecords[entityNumber] as TextEntity).text;
+        }
+
+        internal Link getLink()
+        {
+            return startQuestion;
+        }
     }
 }
