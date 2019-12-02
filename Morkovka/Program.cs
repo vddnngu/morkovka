@@ -17,9 +17,7 @@ namespace Morkovka
             //Application.EnableVisualStyles();
             //Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new Form1());
-            TestParser parser = new TestParser("c:/temp/morkovka/test1.test");
-            parser.Parse();
-            TestProcessing game = new TestProcessing (parser.getRootLink());
+
         }
     }
 }

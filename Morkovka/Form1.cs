@@ -20,19 +20,11 @@ namespace Morkovka
         {
             InitializeComponent();
             mainTextLable = new Label();
-            //GameTest firstTest = new GameTest();
-            //myGUI = new StudentGUI(this, firstTest.myTP);
-            //TestProcessing GameTest = firstTest.myTP;
         }
         private void Form1_Load(object sender, EventArgs e)
         {
 
         }
-        private void but_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("Hello", "Welcome");
-        }
-
         internal void setMainText(string text)
         {
             mainTextLable.Location = new Point((int)(Width * 0.07), (int)(Height / 3));

@@ -172,8 +172,8 @@ namespace Morkovka
             if(entityRecords[entityNumber].type == typeEntity.text) throw new Exception("Type of start entity must be a question or answer!");
             if(entityRecords[entityNumber].type == typeEntity.question)
             {
-                int numText = (entityRecords[entityNumber] as QuestEntity).numText;
-                currentLink = new Question(textEntityHandler(numText));
+                int numText = (entityRecords[entityNumber] as QuestEntity).numText; //подробнее как это работает
+                currentLink = new Question(textEntityHandler(numText)); 
                 int countAnswers = (entityRecords[entityNumber] as QuestEntity).numbersTexts.Count;
                 for (int i = 0; i< countAnswers; i++)
                 {
