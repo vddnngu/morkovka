@@ -23,14 +23,14 @@ namespace Morkovka
     class Question : Link
     {
 
-        List<String>    answers;
-        List<Link>      links;
+        List<String> answers;
+        List<Link> links;
         Dictionary<String, int> map;
-        public Question ()
+        public Question()
         {
             isQuest = true;
         }
-        public Question (String _text, List<String> _answers, List<Link> _links)
+        public Question(String _text, List<String> _answers, List<Link> _links)
         {
             answers = new List<String>();
             links = new List<Link>();
@@ -44,7 +44,21 @@ namespace Morkovka
             foreach (var lIt in _links) links.Add(lIt);
             text = _text;
             isQuest = true;
-            
+
+        }
+        public Question(String _text)
+        {
+            answers = new List<String>();
+            links = new List<Link>();
+            map = new Dictionary<String, int>();
+            text = _text;
+            isQuest = true;
+        }
+
+        public void addAnswer(String answer, Link link)
+        {
+            answers.Add(answer);
+            links.Add(link);
         }
         public Link getNext(String answer)
         {
