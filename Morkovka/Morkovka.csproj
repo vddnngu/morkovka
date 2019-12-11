@@ -58,6 +58,7 @@
     <Compile Include="StudentGui.cs" />
     <Compile Include="TestParser.cs" />
     <Compile Include="TestProcessing.cs" />
+    <Compile Include="TestWriter.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

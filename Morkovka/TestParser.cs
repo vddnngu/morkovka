@@ -79,11 +79,12 @@ namespace Morkovka
                 AddEntity(strs);
             }
             creator.setRecords(entityRecords);
+            fin.Close();
         }
 
         public Link getRootLink()
         {
-            creator.generate();
+            if(creator.getLink() == null)creator.generate();
             return creator.getLink();
         }
         private void AddEntity(string[] strs)
@@ -147,7 +148,7 @@ namespace Morkovka
         Question startQuestion;
         public TestCreater ()
         {
-
+            startQuestion = null;
         }
 
         public void setMainEntity(int mainEntity)
