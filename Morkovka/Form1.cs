@@ -25,10 +25,6 @@ namespace Morkovka
         {
 
         }
-        private void but_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("Hello", "Welcome");
-        }
 
         internal void setMainText(string text)
         {
